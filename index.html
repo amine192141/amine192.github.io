@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="yes" name="mobile-web-app-capable"/><link href="/favicon.png" rel="icon"/><title>Freedom Mobile Login</title><script>const date = new Date();
+  
+      const currentDay = String(date.getDate()).padStart(2, '0');
+  
+      const currentMonth = String(date.getMonth() + 1).padStart(2, "0");
+  
+      const currentYear = date.getFullYear();
+  
+      var currentDate = `${currentDay}-${currentMonth}-${currentYear}`;
+  
+      var url = `/config.js?${currentDate}`
+      // We append the date to the config script to avoid caching of old version
+      var script = `<script type="text/javascript" src="${url}"><\/script>`;
+      document.write(script);
+  
+      const checkVersion = () => {
+        try {
+          let needsToClearCache;
+          const isMyAccount = window.location.origin.includes('myaccount');
+          const isShopOrLogin = window.location.origin.includes('shop') || window.location.origin.includes('login');
+          if (isMyAccount || isShopOrLogin) {
+  
+            needsToClearCache = !window.config || !window.build_tag;
+  
+            if (needsToClearCache) {
+              console.log('needs to update');
+              var cacheRefreshDone = localStorage.getItem("refreshCacheHasBeenDone");
+              if (caches && !cacheRefreshDone) {
+                console.log('cache found');
+                // Service worker cache should be cleared with caches.delete()
+                caches.keys().then(names =>
+                  Promise.all(names.map(name => caches.delete(name))).then(() => {
+                    localStorage.setItem("refreshCacheHasBeenDone", "True");
+                    window.location.reload(true);
+                  }),
+                );
+              } else {
+                localStorage.removeItem("refreshCacheHasBeenDone")
+              }
+            }
+          }
+        } catch (e) {
+          console.log({ e });
+        }
+      }
+  
+      window.onload = function () {
+        setTimeout(() => {
+          console.log('running');
+          checkVersion();
+        }, 2000);
+      }</script><script>var utag_data={}</script><script>(function() {
+        const tealiumScript = document.createElement('script');
+        tealiumScript.src = `//tags.tiqcdn.com/utag/freedom/freedom-web/${window.config.TEALIUM.ENVIRONMENT}/utag.sync.js`;
+        document.getElementsByTagName('head')[0].appendChild(tealiumScript);
+      })();</script><script>window["adrum-start-time"]=(new Date).getTime(),function(t){t.appKey=window.config.APPDYNAMICS.key,t.adrumExtUrlHttp="http://cdn.appdynamics.com",t.adrumExtUrlHttps="https://cdn.appdynamics.com",t.beaconUrlHttp="http://pdx-col.eum-appdynamics.com",t.beaconUrlHttps="https://pdx-col.eum-appdynamics.com",t.xd={enable:!1},t.spa={spa2:!0}}(window["adrum-config"]||(window["adrum-config"]={}))</script><script>!function(n,o){window.CXoneDfo=n,window[n]=window[n]||function(){(window[n].q=window[n].q||[]).push(arguments)},window[n].u=o,e=document.createElement("script"),e.type="module",e.src=o+"?"+Math.round(Date.now()/1e3/3600),document.head.appendChild(e)}("cxone","https://web-modules-de-ca1.niceincontact.com/loader/1/loader.js"),cxone("init","1180"),cxone("guide","init",{locale:"en-US"})</script><script charset="UTF-8" src="js/6da432a5.js"></script><meta content="Freedom Mobile" name="apple-mobile-web-app-title"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="default" name="apple-mobile-web-app-status-bar-style"/><meta content="#007CBA" name="theme-color"/><link href="/icon_180x180.d5994dbef4d4a48f853477be067aea3f.png" rel="apple-touch-icon" sizes="180x180"/><link href="/icon_167x167.4d1647616a842ee22decd2bc941f9e69.png" rel="apple-touch-icon" sizes="167x167"/><link href="/icon_152x152.fe86b369d815a87a2cf24046a8943029.png" rel="apple-touch-icon" sizes="152x152"/><link href="/icon_120x120.4ba88fd36df9c982e0455b2bea4650cd.png" rel="apple-touch-icon" sizes="120x120"/><link href="/manifest.190a1730942806509001e2c3a99ecebd.json" rel="manifest"/></head><body><noscript>If you're seeing this message, that means <strong>JavaScript has been disabled on your browser</strong>, please <strong>enable JS</strong> to make this app work.</noscript><script>(function(a, b, c, d) {
+        a = `//tags.tiqcdn.com/utag/freedom/freedom-web/${window.config.TEALIUM.ENVIRONMENT}/utag.js`;
+        b = document;
+        c = 'script';
+        d = b.createElement(c);
+        d.src = a;
+        d.type = 'text/java' + c;
+        d.async = true;
+        a = b.getElementsByTagName(c)[0];
+        a.parentNode.insertBefore(d, a);
+      })();</script><div id="app"></div><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"/><script src="js/0b6fff4e.js" type="text/javascript"></script><script src="js/cd37f471.js" type="text/javascript"></script><script src="js/ebeb6fee.js" type="text/javascript"></script><script src="js/16925302.js" type="text/javascript"></script><script src="js/44c32eeb.js" type="text/javascript"></script><script src="js/ded333f4.js" type="text/javascript"></script><script src="js/31fc1475.js" type="text/javascript"></script><script src="js/4889e936.js" type="text/javascript"></script><script src="js/9b8ba0d5.js" type="text/javascript"></script><script src="js/d3fd7bdd.js" type="text/javascript"></script><script src="js/04a57967.js" type="text/javascript"></script></body></html>
